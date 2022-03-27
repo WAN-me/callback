@@ -1,0 +1,5 @@
+tgTOKEN = "your_tg_bot_token_here"
+vkTOKEN = "your_vk_bot_token_here"
+tgchat_id = "your_tg_user_or_chat_id_here"
+vkchat_id = "your_vk_user_or_chat_id_here"
+secret = "your_vk_callback_secert_here"
