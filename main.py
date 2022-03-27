@@ -36,6 +36,8 @@ URL: https://wan-me.atlassian.net/browse/{issue['key']}"""
 
 def do(r):
     print(r.dict)
+    r.data.pop('secret')
+    r.data.pop('event_id')
     requests.post(f'https://api.vk.com/method/messages.send?access_token={vkTOKEN}&v=5.131', {"random_id": 0, "peer_id": vkchat_id, 'message': str(r.data)})
 
 @server.sbind('/vk')
