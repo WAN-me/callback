@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sbeaver
 import requests
 import os
