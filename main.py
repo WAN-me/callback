@@ -41,7 +41,7 @@ def do(r):
     requests.post(f'https://api.vk.com/method/messages.send?access_token={vkTOKEN}&v=5.131', {"random_id": 0, "peer_id": vkchat_id, 'message': str(r.data)})
 
 @server.sbind('/vk')
-def all(request: sbeaver.Request):
+def vk(request: sbeaver.Request):
     if request.data.get('secret') == secret:
         do(request)
         return 200, 'ok'
@@ -49,7 +49,7 @@ def all(request: sbeaver.Request):
     return 200, request.dict
 
 @server.sbind('/github')
-def all(request: sbeaver.Request):
+def github(request: sbeaver.Request):
     if request.data.get('hook', {}).get('config', {}).get('secret') == secret:
         print(request.dict)
         return 200, 'ok'
