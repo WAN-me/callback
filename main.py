@@ -33,7 +33,7 @@ URL: https://wan-me.atlassian.net/browse/{issue['key']}"""
     else:
         send_msg(f"{task}\n\nнеобработанное событие:\n{event}")
     return 200, request.dict
-
+ 
 def do(r):
     print(r.dict)
     r.data.pop('secret')
