@@ -48,4 +48,12 @@ def all(request: sbeaver.Request):
     print(request.__dict__)
     return 200, request.dict
 
+@server.sbind('/github')
+def all(request: sbeaver.Request):
+    if request.data.get('hook', {}).get('config', {}).get('secret') == secret:
+        print(request.dict)
+        return 200, 'ok'
+    print(request.__dict__)
+    return 200, request.dict
+
 server.start()
