@@ -50,10 +50,12 @@ def vk(request: sbeaver.Request):
 
 @server.sbind('/github')
 def github(request: sbeaver.Request):
-    if request.data.get('hook', {}).get('config', {}).get('secret') == secret:
-        print(request.dict)
+    if request.headers.get("X-GitHub-Event") == 'push':
+        repo = request.data['repository']['full_name']
+        commits = '\n'.join([x['message'] for x in request.data['commits']])
+        sender = request.data['sender']['login']
+        send_msg(f'{sender} пушнул в {repo}:\n{commits}')
         return 200, 'ok'
-    print(request.__dict__)
     return 200, request.dict
 
 server.start()
