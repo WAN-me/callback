@@ -55,6 +55,12 @@ def github(request: sbeaver.Request):
         commits = '\n'.join([x['message'] for x in request.data['commits']])
         sender = request.data['sender']['login']
         send_msg(f'{sender} пушнул в {repo}:\n{commits}')
+        if repo.split('/')[1] == "api":
+            try:
+                send_msg('Стерт тестов для api')
+                os.system('sh root/apitest.sh &')
+            except:
+                pass
         return 200, 'ok'
     return 200, request.dict
 
