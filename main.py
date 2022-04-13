@@ -59,11 +59,11 @@ def github(request: sbeaver.Request):
             for commit in request.data['commits']:
                 files = ''
                 for mod in commit['modified']:
-                    files+= '\n\t% '+mod
+                    files+= '\n\tedit '+mod
                 for rem in commit['removed']:
-                    files+= '\n\t- '+rem
+                    files+= '\n\tremove '+rem
                 for add in commit['added']:
-                    files+= '\n\t+ '+add
+                    files+= '\n\tadd '+add
                 commits += commit['message']+files
             sender = request.data['sender']['login']
             branch = request.data['ref'].split('/')[-1]
