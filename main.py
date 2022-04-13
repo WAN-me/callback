@@ -58,7 +58,7 @@ def github(request: sbeaver.Request):
         if repo.split('/')[1] == "api":
             try:
                 send_msg('Стерт тестов для api')
-                os.system('sh root/apitest.sh &')
+                os.system('sh root/apitest.sh prod&')
             except:
                 pass
         return 200, 'ok'
