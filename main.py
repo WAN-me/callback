@@ -54,14 +54,17 @@ def github(request: sbeaver.Request):
         repo = request.data['repository']['full_name']
         commits = '\n'.join([x['message'] for x in request.data['commits']])
         sender = request.data['sender']['login']
+        branch = request.data['ref'].split('/')[-1]
         send_msg(f'{sender} пушнул в {repo}:\n{commits}')
         if repo.split('/')[1] == "api":
             try:
-                send_msg('Стерт тестов для api')
-                os.system('bash root/apitest.sh prod &')
+                send_msg('Старт тестов для api')
+                os.system(f'bash ~/apitest.sh {branch} &')
             except:
                 pass
         return 200, 'ok'
+    else:
+        send_msg(request.headers.get("X-GitHub-Event"))
     return 200, request.dict
 
 server.start()
