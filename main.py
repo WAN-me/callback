@@ -64,7 +64,7 @@ def github(request: sbeaver.Request):
                     files+= '\n\t- '+rem
                 for add in commit['added']:
                     files+= '\n\t+ '+add
-                commits += {commit['message']}+{files}
+                commits += commit['message']+files
             sender = request.data['sender']['login']
             branch = request.data['ref'].split('/')[-1]
             send_msg(f'{sender} пушнул в {repo} на ветку {branch}:\n{commits}')
