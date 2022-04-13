@@ -55,7 +55,7 @@ def github(request: sbeaver.Request):
         commits = '\n'.join([x['message'] for x in request.data['commits']])
         sender = request.data['sender']['login']
         branch = request.data['ref'].split('/')[-1]
-        send_msg(f'{sender} пушнул в {repo}:\n{commits}')
+        send_msg(f'{sender} пушнул в {repo} на ветку {branch}:\n{commits}')
         if repo.split('/')[1] == "api":
             try:
                 send_msg('Старт тестов для api')
