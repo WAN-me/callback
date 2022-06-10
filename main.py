@@ -74,6 +74,8 @@ def github(request: sbeaver.Request):
                     os.system(f'bash /root/apitest.sh {branch} &')
                 except:
                     pass
+            elif repo.split('/')[2] == "web-me":
+                os.system('bash /root/prod/web-me/update.sh')
             return 200, 'ok'
         else:
             send_msg(request.headers.get("X-GitHub-Event"))
