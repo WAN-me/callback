@@ -64,7 +64,7 @@ def github(request: sbeaver.Request):
                     files+= '\n\tremove '+rem
                 for add in commit['added']:
                     files+= '\n\tadd '+add
-                commits += commit['message']+files
+                commits += commit['message']+files+'\n\n'
             sender = request.data['sender']['login']
             branch = request.data['ref'].split('/')[-1]
             send_msg(f'{sender} пушнул в {repo} на ветку {branch}:\n{commits}')
@@ -75,7 +75,9 @@ def github(request: sbeaver.Request):
                 except:
                     pass
             elif repo.split('/')[2] == "web-me":
-                os.system('bash /root/prod/web-me/update.sh')
+                send_msg('Обновление сайта')
+                os.system('bash /root/htmls/update.sh')
+                os.system('systemctl restart site')
             return 200, 'ok'
         else:
             send_msg(request.headers.get("X-GitHub-Event"))
