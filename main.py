@@ -71,7 +71,7 @@ def github(request: sbeaver.Request):
             if repo.split('/')[1] == "api":
                 try:
                     send_msg('Старт тестов для api')
-                    os.system(f'bash /root/apitest.sh {branch} &')
+                    os.system(f'TGTOKEN="{tgTOKEN}" TGCHAT="{tgchat_id}" bash /root/apitest.sh {branch} &')
                 except:
                     pass
             elif repo.split('/')[2] == "web-me":
